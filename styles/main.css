@@ -63,6 +63,10 @@ body {
     color:rgb(233,50,117);
 }
 
+.links-container .navbar-link:active {
+    background-color: white;
+}
+
 @media (min-width: 640px) {
     html { font-size: 112%; } 
     
