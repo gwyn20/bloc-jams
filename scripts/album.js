@@ -28,6 +28,21 @@ var albumMarconi = {
     ]
 };
 
+var albumBamber = {
+    title: 'Grey on Grey',
+    artist: 'Bamber',
+    label: 'Kenwood',
+    year: '2017',
+    albumArtUrl: 'assets/images/album_covers/22.png',
+    songs: [
+        { title: 'Whiskers', duration: '3:29' },
+        { title: 'Cat Soup', duration: '4:52' },
+        { title: 'Meep', duration: '2:49' },
+        { title: 'Not Now Branston', duration: '3:18' },
+        { title: 'Wake Up', duration: '1:10' }
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
@@ -40,12 +55,13 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function(album) {
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
@@ -61,4 +77,17 @@ var setCurrentAlbum = function(album) {
  
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+    
+    var albums = [albumPicasso, albumMarconi, albumBamber];
+    var i = 1;
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albums[i]);
+        i++;
+        if (i == albums.length) {
+            i = 0;
+        }
+        
+    });
 };
+
+
