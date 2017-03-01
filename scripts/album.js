@@ -61,17 +61,18 @@ var setCurrentAlbum = function(album) {
 
 var findParentByClassName = function(element, targetClass) {
     if (element.parentElement === null) {
-        console.log; "No parent found";
-    }
-    else if (element) {
+        console.log; ("No parent found");
+    } else (element) {
         var parent = element.parentElement;
-        while (parent.className != targetClass && parent.className !== null) {
-        parent = parent.parentElement;
-            if (parent !== targetClass) {
-                console.log; "No parent found with that class name";
+        while (parent.className !== targetClass && parent.className !== null) {
+            parent = parent.parentElement;
             }
         }
+    if (parent.className !== targetClass) {
+                console.log; ("No parent found with that class name");
+    } else {
         return parent;
+    }
     }
 };
 
@@ -121,11 +122,10 @@ window.onload = function() {
     
     songListContainer.addEventListener('mouseover', function(event) {
             if (event.target.parentElement.className === 'album-view-song-item') {
-                event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
                 var songItem = getSongItem(event.target);
                 var songItemNumber = songItem.getAttribute('data-song-number');
                 if (songItemNumber === currentlyPlayingSong) {
-                songItem.innerHTML = pauseButtonTemplate;
+                    songItem.innerHTML = pauseButtonTemplate;
                 }
             }
     });
