@@ -73,7 +73,6 @@ var findParentByClassName = function(element, targetClass) {
     } else {
         return parent;
     }
-    }
 };
 
 var getSongItem = function(element) {
