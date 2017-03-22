@@ -42,9 +42,10 @@ var createSongRow = function(songNumber, songName, songLength) {
             currentlyPlayingSongElement.html(currentlyPlayingSongNumber);
         }
         if (currentlyPlayingSongNumber !== songItemNumber) {
-            $(this).html(pauseButtonTemplate);
             setSong(songItemNumber);
             currentSoundFile.play();
+            $(this).html(pauseButtonTemplate);
+            currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
             updatePlayerBarSong();
         } else if (currentlyPlayingSongNumber === songItemNumber) {
             if (currentSoundFile.isPaused()) {
@@ -168,17 +169,16 @@ var updatePlayerBarSong = function() {
 
 var togglePlayFromPlayerBar = function() {
         
-     if (currentSoundFile.ispaused()) {
-                $playPause.html(playerBarPauseButton);
-                $('.main-controls .play-pause').html(pauseButtonTemplate);
-                currentSoundFile.play();
-            } else {
-                $playPause.html(playButtonTemplate);
-                $('.main-controls .play-pause').html(playButtonTemplate);
-                currentSoundFile.pause();
-            }
-        }; 
-    };
+    if (currentSoundFile.isPaused()) {
+        $(currentlyPlayingSongNumber).html(pauseButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPauseButton);
+        currentSoundFile.play();
+    } else {
+        $(currentlyPlayingSongNumber).html(playButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+        currentSoundFile.pause();
+        }
+    }; 
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
