@@ -40,8 +40,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         if (currentlyPlayingSongNumber !== null) {
             var currentlyPlayingSongElement = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingSongElement.html(currentlyPlayingSongNumber);
-        }
-        if (currentlyPlayingSongNumber !== songItemNumber) {
+        } else if (currentlyPlayingSongNumber !== songItemNumber) {
             $(this).html(pauseButtonTemplate);
             setSong(songItemNumber);
             currentSoundFile.play();
@@ -120,8 +119,8 @@ var nextSong = function() {
     var lastSongNumber = currentlyPlayingSongNumber;
     
     setSong(currentSongIndex + 1);
+
     currentSoundFile.play();
-    
     updatePlayerBarSong();
     
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -143,8 +142,8 @@ var previousSong = function() {
     var lastSongNumber = currentlyPlayingSongNumber;
 
     setSong(currentSongIndex + 1);
+
     currentSoundFile.play();
-    
     updatePlayerBarSong();
     
     $('.main-controls .play-pause').html(playerBarPauseButton);
