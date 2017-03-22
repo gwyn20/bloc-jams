@@ -36,7 +36,7 @@ var createSongRow = function(songNumber, songName, songLength) {
     
     var clickHandler = function() {
         var songItemNumber = parseInt($(this).attr('data-song-number'));
-    
+        
         if (currentlyPlayingSongNumber !== null) {
             var currentlyPlayingSongElement = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingSongElement.html(currentlyPlayingSongNumber);
