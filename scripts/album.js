@@ -42,12 +42,13 @@ var createSongRow = function(songNumber, songName, songLength) {
             currentlyPlayingSongElement.html(currentlyPlayingSongNumber);
         }
         if (currentlyPlayingSongNumber !== songItemNumber) {
-            $(this).html(pauseButtonTemplate);
             setSong(songItemNumber);
             currentSoundFile.play();
+            $(this).html(pauseButtonTemplate);
+            currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
             updatePlayerBarSong();
         } else if (currentlyPlayingSongNumber === songItemNumber) {
-            if (currentSoundFile.ispaused()) {
+            if (currentSoundFile.isPaused()) {
                 $(this).html(pauseButtonTemplate);
                 $('.main-controls .play-pause').html(playerBarPauseButton);
                 currentSoundFile.play();
