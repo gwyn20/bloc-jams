@@ -36,14 +36,18 @@ var createSongRow = function(songNumber, songName, songLength) {
     
     var clickHandler = function() {
         var songItemNumber = parseInt($(this).attr('data-song-number'));
-    
+        
         if (currentlyPlayingSongNumber !== null) {
             var currentlyPlayingSongElement = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingSongElement.html(currentlyPlayingSongNumber);
         } else if (currentlyPlayingSongNumber !== songItemNumber) {
             $(this).html(pauseButtonTemplate);
+        }
+        if (currentlyPlayingSongNumber !== songItemNumber) {
             setSong(songItemNumber);
             currentSoundFile.play();
+            $(this).html(pauseButtonTemplate);
+            currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
             updatePlayerBarSong();
         } else if (currentlyPlayingSongNumber === songItemNumber) {
             if (currentSoundFile.isPaused()) {
