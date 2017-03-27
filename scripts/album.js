@@ -173,12 +173,15 @@ var togglePlayFromPlayerBar = function() {
         $(currentlyPlayingSongNumber).html(pauseButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPauseButton);
         currentSoundFile.play();
+        createSongRow();
     } else {
         $(currentlyPlayingSongNumber).html(playButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPlayButton);
         currentSoundFile.pause();
+        createSongRow();
         }
-    }; 
+    
+}; 
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
