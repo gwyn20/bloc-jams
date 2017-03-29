@@ -170,15 +170,13 @@ var updatePlayerBarSong = function() {
 var togglePlayFromPlayerBar = function() {
         
     if (currentSoundFile.isPaused()) {
-        $(currentlyPlayingSongNumber).html(pauseButtonTemplate);
+        $('td[data-song-number="' + currentlyPlayingSongNumber + '"]').html(pauseButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPauseButton);
         currentSoundFile.play();
-        createSongRow();
     } else {
-        $(currentlyPlayingSongNumber).html(playButtonTemplate);
+        $('td[data-song-number="' + currentlyPlayingSongNumber + '"]').html(playButtonTemplate);
         $('.main-controls .play-pause').html(playerBarPlayButton);
         currentSoundFile.pause();
-        createSongRow();
         }
     
 }; 
