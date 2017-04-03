@@ -25,21 +25,31 @@ var setVolume = function(volume) {
     }
 };
 
+var filterTimeCode = function(timeInSeconds) {
+    parseFloat(timeInSeconds);
+    var wholeMinutes = Math.floor(timeInSeconds / 60);
+    var wholeSeconds = Math.floor(timeInSeconds - wholeMinutes * 60);
+    if (wholeSeconds < 10) {
+        wholeSeconds = ("0" + wholeSeconds)
+    };
+        
+    return (wholeMinutes + ":" + wholeSeconds);    
+   
+};
+
 var setCurrentTimeInPlayerBar = function(currentTime) {
     if (currentSoundFile) {
-        $('.current-time').text(currentTime);
-    }
+        $('.current-time').text(filterTimeCode(currentTime));  
+    } 
 };
 
 var setTotalTimeInPlayerBar = function(totalTime) {
     if (currentSoundFile) {
-        $('.total-time').text(totalTime);
+        $('.total-time').text(filterTimeCode(totalTime));   
     }
 };
 
-var filterTimeCode = function(timeInSeconds) {
-    
-}
+
 
 var getSongNumberCell = function(number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
@@ -50,7 +60,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
 
@@ -260,7 +270,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    var $totalTime = this.getDuration();
+    var $totalTime = (currentSongFromAlbum.duration);
             
     setTotalTimeInPlayerBar($totalTime);
 
