@@ -29,11 +29,11 @@ var filterTimeCode = function(timeInSeconds) {
     parseFloat(timeInSeconds);
     var wholeMinutes = Math.floor(timeInSeconds / 60);
     var wholeSeconds = Math.floor(timeInSeconds - wholeMinutes * 60);
-    if (wholeSeconds < 10) {
-        wholeSeconds = ("0" + wholeSeconds)
-    };
+        if (wholeSeconds < 10) {
+            wholeSeconds = ('0' + wholeSeconds)
+        };
         
-    return (wholeMinutes + ":" + wholeSeconds);    
+    return (wholeMinutes + ':' + wholeSeconds);    
    
 };
 
