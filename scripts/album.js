@@ -17,13 +17,39 @@ var seek = function(time) {
     if (currentSoundFile) {
         currentSoundFile.setTime(time);
     }
-}
+};
 
 var setVolume = function(volume) {
     if (currentSoundFile) {
         currentSoundFile.setVolume(volume);
     }
 };
+
+var filterTimeCode = function(timeInSeconds) {
+    parseFloat(timeInSeconds);
+    var wholeMinutes = Math.floor(timeInSeconds / 60);
+    var wholeSeconds = Math.floor(timeInSeconds - wholeMinutes * 60);
+        if (wholeSeconds < 10) {
+            wholeSeconds = ('0' + wholeSeconds)
+        };
+        
+    return (wholeMinutes + ':' + wholeSeconds);    
+   
+};
+
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    if (currentSoundFile) {
+        $('.current-time').text(filterTimeCode(currentTime));  
+    } 
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    if (currentSoundFile) {
+        $('.total-time').text(filterTimeCode(totalTime));   
+    }
+};
+
+
 
 var getSongNumberCell = function(number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
@@ -34,7 +60,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
 
@@ -124,7 +150,9 @@ var updateSeekBarWhileSongPlays = function() {
         currentSoundFile.bind('timeupdate', function(event) {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
-
+            var $currentTime = this.getTime();
+            
+            setCurrentTimeInPlayerBar($currentTime);
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
     }
@@ -242,6 +270,9 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    var $totalTime = (currentSongFromAlbum.duration);
+            
+    setTotalTimeInPlayerBar($totalTime);
 
 };
 
